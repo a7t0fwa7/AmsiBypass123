@@ -20,6 +20,19 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  **/
 
+// WALKTHROUGH OF header.h for learning purposes
+
+/*
+The below block starts off by defining a namespace obf and within it defines a template struct called MetaRandomGenerator that is used to generate random numbers at compile-time. 
+The generator uses a linear congruential algorithm with the formula Xn+1 = (a * Xn + c) % m to generate pseudo-random numbers based on a seed value that is determined by the current time.
+
+The MetaRandomGenerator template takes an integer value N and recursively generates a sequence of random numbers based on the value of N. Each instance of the template generates a random number using the previous instance's result, until it reaches N = 0 which uses the seed value. The value member of the MetaRandomGenerator struct is the generated random number.
+
+The MetaRandom template is used to extract a random number between 0 and M-1 using the value member of the MetaRandomGenerator struct. It takes two integer template arguments N and M, and calculates the modulus of MetaRandomGenerator<N+1>::value with M to produce a random number between 0 and M-1.
+
+This compile-time random number generator can be used to obfuscate code by generating random numbers at compile-time to make the resulting code more difficult to reverse engineer.
+*/
+
 #ifndef INSTR_H
 #define INSTR_H
 
